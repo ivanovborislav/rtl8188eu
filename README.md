@@ -7,7 +7,7 @@
 - v5.13.3 (20210615)
 - Based on EDIMAX EW-7811Un V2 Linux Driver (Version : 1.0.1.3) 2021-10-01
 - Support Kernel: 3.8 - 5.4 (Realtek)
-- Support up to Kernel 5.14 (k5.15 added but not tested yet)
+- Support up to Kernel 5.15
 
 ##	Specification
 
@@ -29,9 +29,13 @@
 ## Tested Linux Distros and Tools
 
 Successful tested injection `aireplay-ng -9 <interface>`, deauthentication `aireplay-ng -0 1 -a <bssid> <interface>`.
+
 Successful hcxdumptool driver test `hcxdumptool -i <interface> --check_driver` and capture packets `hcxdumptool -i <interface> -o test.pcapng --filterlist_ap=targets.lst --filtermode=2 --enable_status=15` `(hcxdumptool -i <interface> -o test.pcapng --filterlist=targets.lst --filtermode=2 --enable_status=15)`.
+
 Connecting to AP with WPA3 (WPA3-SAE) authentication method (IMPORTANT: Network Manager, is not support WPA3 on this driver. Connecting with wpa_supplicant).
+
 Start WPA3 (WPA3-SAE) SoftAP.
+
 TX power control tested with SoftAP mode and OpenWrt firmware (OpenWrt 21.02.0 r16279-5cc0535800, Channel Analysis Feature).
 
 - Ubuntu 11.10 (kernel 3.0)
@@ -75,11 +79,17 @@ TX power control tested with SoftAP mode and OpenWrt firmware (OpenWrt 21.02.0 r
   * hcxdumptool 6.1.6
   * wpa_supplicant v2.10-devel-hostap_2_9-2433-g8d881d942
 
+- Ubuntu 21.10 (kernel 5.15)
+  * Aircrack-ng 1.6
+  * hcxdumptool 6.2.4
+  * wpa_supplicant v2.10-devel-hostap_2_9-2398-g8a54c252a
+  * hostapd v2.10-devel-hostap_2_9-2398-g8a54c252a
+
 ## HOW TO
 
 ### Install
 
-Download source
+Download source:
 
 ```
 git clone https://github.com/ivanovborislav/rtl8188eu.git
