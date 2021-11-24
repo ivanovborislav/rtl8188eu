@@ -279,8 +279,6 @@ sudo killall hostapd
 sudo hostapd -i <interface> hostapd.conf
 ```
 
-### [Kali NetHunter Kernel module Samsung Galaxy S5] (https://github.com/ivanovborislav/document/blob/main/NetHunter_Kernel_module_Samsung_Galaxy_S5.md)
-
 ## Test devices
 
 - TP-Link TL-WN722N V3
