@@ -20,7 +20,7 @@
   * P2P-GO
 - Packet injection
 - TX power control
-- LED control
+- LED control (based on the [morrownr](https://github.com/morrownr) source code)
 - Power saving control
 - Driver debug log level control
 - Security:
