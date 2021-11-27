@@ -172,7 +172,7 @@ sudo insmod /lib/modules/$(uname -r)/kernel/drivers/net/wireless/8188eu.ko rtw_i
 
 #### Change driver options loading from file
 
-Create file `8188eu.conf` containing `options 8188eu rtw_ips_mode=1 rtw_drv_log_level=4 rtw_power_mgnt=2 rtw_led_ctrl=1`.
+Create a file `8188eu.conf` containing `options 8188eu rtw_ips_mode=1 rtw_drv_log_level=4 rtw_power_mgnt=2 rtw_led_ctrl=1`.
 Copy a file to `/etc/modprobe.d/` directory.
 
 ```
