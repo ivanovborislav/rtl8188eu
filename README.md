@@ -20,7 +20,7 @@
   * P2P-GO
 - Packet injection
 - TX power control
-- LED control (based on the [morrownr](https://github.com/morrownr) source code)
+- LED control
 - Power saving control
 - Driver debug log level control
 - Security:
@@ -207,9 +207,9 @@ Driver debug log level control, rtw_drv_log_level=
 
 Driver LED control, rtw_led_ctrl=
 ```
-0:Always off
-1:Normal blink (default)
-2:Always on
+0:led off
+1:led blink (default)
+2:led on
 ```
 
 ### Connecting with wpa_supplicant
