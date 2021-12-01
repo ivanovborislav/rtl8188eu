@@ -41,13 +41,17 @@ SwLedOn_8188EU(
 	PLED_USB		pLed
 )
 {
-	u8	LedCfg;
+	u8	LedCfg, gpio_mode;
+	u32 gpio_value;
 	/* HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter); */
 
 	if (RTW_CANNOT_RUN(padapter))
 		return;
 
 	LedCfg = rtw_read8(padapter, REG_LEDCFG2);
+	gpio_mode = rtw_read8(padapter, 0x40);
+	gpio_value = rtw_read32(padapter, 0x44);
+#if 0
 	switch (pLed->LedPin) {
 	case LED_PIN_LED0:
 		rtw_write8(padapter, REG_LEDCFG2, (LedCfg & 0xf0) | BIT5 | BIT6); /* SW control led0 on. */
@@ -60,6 +64,13 @@ SwLedOn_8188EU(
 	default:
 		break;
 	}
+#endif
+	rtw_write8(padapter, REG_LEDCFG2, LedCfg & (~BIT5));
+	rtw_write8(padapter, 0x40, gpio_mode & (~(BIT0 | BIT1)));
+	gpio_value |= (BIT5 << 24);
+	gpio_value |= (BIT5 << 16);
+	gpio_value &= (~(BIT5 << 8));
+	rtw_write32(padapter, 0x44, gpio_value);
 
 	pLed->bLedOn = _TRUE;
 }
@@ -75,7 +86,8 @@ SwLedOff_8188EU(
 	PLED_USB		pLed
 )
 {
-	u8	LedCfg;
+	u8	LedCfg, gpio_mode;
+	u32 gpio_value;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 
 	if (RTW_CANNOT_RUN(padapter))
@@ -84,6 +96,9 @@ SwLedOff_8188EU(
 
 	LedCfg = rtw_read8(padapter, REG_LEDCFG2);/* 0x4E */
 
+	gpio_mode = rtw_read8(padapter, 0x40);
+	gpio_value = rtw_read32(padapter, 0x44);
+#if 0
 	switch (pLed->LedPin) {
 	case LED_PIN_LED0:
 		if (pHalData->bLedOpenDrain == _TRUE) { /* Open-drain arrangement for controlling the LED) */
@@ -104,6 +119,14 @@ SwLedOff_8188EU(
 	default:
 		break;
 	}
+#endif
+	rtw_write8(padapter, REG_LEDCFG2, LedCfg & (~BIT5));
+	rtw_write8(padapter, 0x40, gpio_mode & (~(BIT0 | BIT1)));
+	gpio_value |= (BIT5 << 24);
+	gpio_value |= (BIT5 << 16);
+	gpio_value |= (BIT5 << 8);
+	rtw_write32(padapter, 0x44, gpio_value);
+
 exit:
 	pLed->bLedOn = _FALSE;
 
@@ -131,8 +154,15 @@ rtl8188eu_InitSwLeds(
 
 	pledpriv->LedControlHandler = LedControlUSB;
 
-	pledpriv->SwLedOn = SwLedOn_8188EU;
-	pledpriv->SwLedOff = SwLedOff_8188EU;
+	/* Turn on/off LED according to led_ctrl specified. */
+	if (padapter->registrypriv.led_ctrl == 0) {
+		pledpriv->SwLedOff = SwLedOff_8188EU;
+	} else if (padapter->registrypriv.led_ctrl >= 2) {
+		pledpriv->SwLedOn = SwLedOn_8188EU;
+	} else {
+		pledpriv->SwLedOn = SwLedOn_8188EU;
+		pledpriv->SwLedOff = SwLedOff_8188EU;
+	}
 
 	InitLed(padapter, &(pledpriv->SwLed0), LED_PIN_LED0);
 
