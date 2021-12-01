@@ -1745,18 +1745,6 @@ void BlinkHandler(PLED_USB pLed)
 		return;
 	}
 
-	#ifdef CONFIG_RTW_SW_LED
-	/* Toggle LED state according to led_ctrl specified. */
-	if (padapter->registrypriv.led_ctrl != 1) {
-		if (padapter->registrypriv.led_ctrl == 0) {
-			pLed->BlinkingLedState = RTW_LED_OFF;
-		} else {
-			pLed->BlinkingLedState = RTW_LED_ON;
-		}
-		pLed->CurrLedState = LED_UNKNOWN;
-	}
-	#endif
-
 	switch (ledpriv->LedStrategy) {
 	#if CONFIG_RTW_SW_LED_TRX_DA_CLASSIFY
 	case SW_LED_MODE_UC_TRX_ONLY:
