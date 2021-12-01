@@ -143,7 +143,7 @@ int rtw_early_mode = 1;
 #endif
 
 #ifdef CONFIG_RTW_SW_LED
-int rtw_led_ctrl = 1; /* Default is set to Normal blink */
+int rtw_led_ctrl = 1; /* default led blink */
 #endif
 
 int rtw_usb_rxagg_mode = 2;/* RX_AGG_DMA=1, RX_AGG_USB=2 */
@@ -619,7 +619,7 @@ module_param(rtw_early_mode, int, 0644);
 
 #ifdef CONFIG_RTW_SW_LED
 module_param(rtw_led_ctrl, int, 0644);
-MODULE_PARM_DESC(rtw_led_ctrl,"LED control, 0:Always off, 1:Normal blink, 2:Always on");
+MODULE_PARM_DESC(rtw_led_ctrl,"led control, 0:led off, 1:led blink, 2:led on");
 #endif
 
 #ifdef CONFIG_ADAPTOR_INFO_CACHING_FILE
@@ -4222,7 +4222,7 @@ void rtw_ips_pwr_down(_adapter *padapter)
 
 	padapter->net_closed = _TRUE;
 
-	rtw_led_control(padapter, LED_CTL_POWER_OFF);
+//	rtw_led_control(padapter, LED_CTL_POWER_OFF);
 
 	rtw_ips_dev_unload(padapter);
 	RTW_INFO("<=== rtw_ips_pwr_down..................... in %dms\n", rtw_get_passing_time_ms(start_time));
