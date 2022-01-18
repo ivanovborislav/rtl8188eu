@@ -155,6 +155,18 @@ IMPORTANT: Prevent loading old driver r8188eu.
 echo "blacklist r8188eu" > /etc/modprobe.d/realtek.conf
 ```
 
+Raspberry Pi:
+
+Edit `Makefile`:
+
+Ln143 - `CONFIG_PLATFORM_I386_PC = y` to `CONFIG_PLATFORM_I386_PC = n`
+
+Ln144 - `CONFIG_PLATFORM_RPI_ARM = n` to `CONFIG_PLATFORM_RPI_ARM = y` for ARM
+
+or
+
+Ln145 - `CONFIG_PLATFORM_RPI_ARM64 = n` to `CONFIG_PLATFORM_RPI_ARM64 = y` for ARM64
+
 ### Monitor mode
 
 ```
