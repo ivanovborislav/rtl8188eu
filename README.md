@@ -23,6 +23,7 @@
 - LED control
 - Power saving control
 - Driver debug log level control
+- REGD source selection
 - Security:
   * WEP 64/128-bit, WPA, WPA2, and WPA3
 
@@ -249,6 +250,12 @@ Driver LED control, rtw_led_ctrl=
 0:led off
 1:led blink (default)
 2:led on
+```
+
+Driver REGD source selection, rtw_regd_src=
+```
+0:Realtek defined
+1:OS (default, get channel plan from OS)
 ```
 
 ### Connecting with wpa_supplicant
