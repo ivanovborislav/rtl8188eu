@@ -20,6 +20,9 @@
 #define RTL8188E_FPGA_TRUE_PHY_VERIFICATION 0
 
 /* ***** temporarily flag ******* */
+
+#define CONFIG_REGD_SRC_FROM_OS /* default regd source selection */
+
 /*
  * Public  General Config
  */
