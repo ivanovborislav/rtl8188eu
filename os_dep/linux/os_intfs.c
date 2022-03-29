@@ -2174,7 +2174,11 @@ int rtw_os_ndev_register(_adapter *adapter, const char *name)
 	/* alloc netdev name */
 	rtw_init_netdev_name(ndev, name);
 
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0))
 	_rtw_memcpy(ndev->dev_addr, adapter_mac_addr(adapter), ETH_ALEN);
+#else
+	dev_addr_set(ndev, adapter_mac_addr(adapter));
+#endif
 
 	/* Tell the network stack we exist */
 
