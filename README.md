@@ -7,11 +7,7 @@
 - v5.13.3 (20210615)
 - Based on EDIMAX EW-7811Un V2 Linux Driver (Version : 1.0.1.3) 2021-10-01
 - Support Kernel: 3.8 - 5.4 (Realtek)
-- Support up to Kernel 5.16
-
-Kernel 5.17-rc6 support
-
-`wget https://raw.githubusercontent.com/ivanovborislav/document/main/patch/rtl8188EU_v5.13.3_kernel_5.17-rc5_support.patch`
+- Support up to Kernel 5.17
 
 ## Specification
 
@@ -64,11 +60,11 @@ Start WPA3 (WPA3-SAE) SoftAP.
 
 TX power control tested with SoftAP mode and OpenWrt firmware (OpenWrt 21.02.0 r16279-5cc0535800, Channel Analysis Feature).
 
-- Ubuntu 21.10 (kernel 5.17-rc6)
-  * Aircrack-ng 1.6
+- Ubuntu 21.10 (kernel 5.17)
   * hcxdumptool 6.2.4
-  * hostapd v2.11-devel-hostap_2_10-101-g203a027b2
-  * wpa_supplicant v2.11-devel-hostap_2_10-101-g203a027b2
+  * Aircrack-ng 1.6
+  * wpa_supplicant v2.11-devel-hostap_2_10-151-g3085e1a67
+  * hostapd v2.11-devel-hostap_2_10-151-g3085e1a67
 
 <details>
   <summary>
