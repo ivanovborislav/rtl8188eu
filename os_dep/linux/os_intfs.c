@@ -1634,7 +1634,11 @@ static int rtw_net_set_mac_address(struct net_device *pnetdev, void *addr)
 	}
 
 	_rtw_memcpy(adapter_mac_addr(padapter), sa->sa_data, ETH_ALEN); /* set mac addr to adapter */
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0))
 	_rtw_memcpy(pnetdev->dev_addr, sa->sa_data, ETH_ALEN); /* set mac addr to net_device */
+#else
+	dev_addr_set(pnetdev, sa->sa_data); /* set mac addr to net_device */
+#endif
 
 #if 0
 	if (rtw_is_hw_init_completed(padapter)) {
