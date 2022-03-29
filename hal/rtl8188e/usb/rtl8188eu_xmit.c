@@ -25,7 +25,11 @@ s32	rtl8188eu_init_xmit_priv(_adapter *padapter)
 
 #ifdef PLATFORM_LINUX
 	tasklet_init(&pxmitpriv->xmit_tasklet,
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0))
 		     (void(*)(unsigned long))rtl8188eu_xmit_tasklet,
+#else
+		     (void *)rtl8188eu_xmit_tasklet,
+#endif
 		     (unsigned long)padapter);
 #endif
 #ifdef CONFIG_TX_EARLY_MODE
