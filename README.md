@@ -54,7 +54,7 @@ NO `fixed channel 1` issue.
 
 Successful hcxdumptool driver test `hcxdumptool -i <interface> --check_driver` and capture packets `hcxdumptool -i <interface> -o test.pcapng --filterlist_ap=targets.lst --filtermode=2 --enable_status=15` `(hcxdumptool -i <interface> -o test.pcapng --filterlist=targets.lst --filtermode=2 --enable_status=15)`.
 
-Connecting to AP with WPA3 (WPA3-SAE) authentication method (IMPORTANT: Network Manager, is not support WPA3 on this driver. Connecting with wpa_supplicant).
+Connecting to AP with WPA3 (WPA3-SAE) authentication method (IMPORTANT: Test distro Ubuntu 22.04 kernel 5.15 - NetworkManager 1.36.4 nmcli tool, version 1.36.4. Otherwise use wpa_supplicant).
 
 Start WPA3 (WPA3-SAE) SoftAP.
 
