@@ -7,7 +7,7 @@
 - v5.13.3 (20210615)
 - Based on EDIMAX EW-7811Un V2 Linux Driver (Version : 1.0.1.3) 2021-10-01
 - Support Kernel: 3.8 - 5.4 (Realtek)
-- Support up to Kernel 5.18
+- Support up to Kernel 5.19
 
 ## Specification
 
@@ -60,11 +60,22 @@ Start WPA3 (WPA3-SAE) SoftAP.
 
 TX power control tested with SoftAP mode and OpenWrt firmware (OpenWrt 21.02.0 r16279-5cc0535800, Channel Analysis Feature).
 
-- Ubuntu 22.04 (kernel 5.18)
+- Ubuntu 22.04 (kernel 5.19)
+  * Aircrack-ng 1.6
+  * hcxdumptool 6.2.6
+  * wpa_supplicant v2.11-devel-hostap_2_10-309-gc3d389b72
+  * hostapd v2.11-devel-hostap_2_10-309-gc3d389b72
+
+<details>
+  <summary>
+    Ubuntu 22.04 (kernel 5.18)
+  </summary>
+  
   * wpa_supplicant v2.11-devel-hostap_2_10-309-gc3d389b72
   * hostapd v2.11-devel-hostap_2_10-309-gc3d389b72
   * Aircrack-ng 1.6
   * hcxdumptool 6.2.6
+</details>
 
 <details>
   <summary>
