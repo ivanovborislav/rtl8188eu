@@ -9,6 +9,17 @@
 - Support Kernel: 3.8 - 5.4 (Realtek)
 - Support up to Kernel 5.19
 
+Kernel 5.19.X patch
+```
+cd rtl8188eu
+wget https://raw.githubusercontent.com/ivanovborislav/document/main/patch/rtl8188EU_v5.13.3_kernel_5.19.2.patch
+patch -p1 < rtl8188EU_v5.13.3_kernel_5.19.2.patch
+sudo make uninstall
+make clean
+make
+sudo make install
+```
+
 ## Specification
 
 - Supported interface modes:
