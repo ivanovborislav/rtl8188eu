@@ -7,18 +7,7 @@
 - v5.13.3 (20210615)
 - Based on EDIMAX EW-7811Un V2 Linux Driver (Version : 1.0.1.3) 2021-10-01
 - Support Kernel: 3.8 - 5.4 (Realtek)
-- Support up to Kernel 5.19
-
-Kernel 5.19.X - 6.0.0rc3 patch
-```
-cd rtl8188eu
-wget https://raw.githubusercontent.com/ivanovborislav/document/main/patch/rtl8188EU_v5.13.3_kernel_5.19.2-6.0.0rc3.patch
-patch -p1 < rtl8188EU_v5.13.3_kernel_5.19.2-6.0.0rc3.patch
-sudo make uninstall
-make clean
-make
-sudo make install
-```
+- Support up to Kernel 6.0.0
 
 ## Specification
 
