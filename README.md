@@ -253,6 +253,14 @@ or
 
 Ln145 - CONFIG_PLATFORM_RPI_ARM64 = `n` to CONFIG_PLATFORM_RPI_ARM64 = `y` for ARM64
 
+### DKMS installation
+```
+sudo git clone "https://github.com/ivanovborislav/rtl8188eu.git" /usr/src/rtl8188eu-5.13.3
+sudo dkms add -m rtl8188eu -v 5.13.3
+sudo dkms autoinstall
+dkms status
+```
+
 ### Monitor mode
 
 ```
