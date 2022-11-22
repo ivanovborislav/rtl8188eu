@@ -260,6 +260,14 @@ sudo dkms add -m rtl8188eu -v 5.13.3
 sudo dkms autoinstall
 dkms status
 ```
+or
+```
+sudo git clone "https://github.com/ivanovborislav/rtl8188eu.git" /usr/src/rtl8188eu-5.13.3
+sudo dkms add -m rtl8188eu -v 5.13.3
+sudo dkms build -m rtl8188eu -v 5.13.3
+sudo dkms install -m rtl8188eu -v 5.13.3
+dkms status
+```
 
 ### Monitor mode
 
