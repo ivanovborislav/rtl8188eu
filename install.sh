@@ -1,5 +1,5 @@
 #!/bin/bash
-# Simple install script for 88x2bu
+# Simple install script for 8188eu
 # December, 25 2022 v0.0.2 borislavIvanov
 
 MODNAME="8188eu"
