@@ -5,6 +5,7 @@
 MODNAME="8188eu"
 DRVNAME="rtl8188eu"
 DRVVER="5.13.3"
+DRVSTATUS="installed"
 KVER="$(uname -r)"
 MODDESTDIR="/lib/modules/${KVER}/kernel/drivers/net/wireless/"
 
@@ -41,7 +42,7 @@ if ! command -v dkms >/dev/null 2>&1;then
 		echo "Module ${DRVNAME} already installed"
 	fi
 else
-	if [[ ! "`dkms status`" =~ "${DRVNAME}" ]];then
+	if [[ ! "$(echo "`dkms status`" | awk '/'${DRVNAME}'/ {print}')" =~ "${DRVSTATUS}" ]];then
 		if [ -e /usr/src/${DRVNAME}-${DRVVER} ];then
 			if [ "$EUID" != "0" ];then
 				echo "You need root permissions:"
@@ -67,13 +68,26 @@ else
 				rm -f ${MODDESTDIR}${MODNAME}.ko
 			fi
 		fi
-		if [ "$EUID" != "0" ];then
-			echo "You need root permissions:"
-			sudo dkms add -m ${DRVNAME} -v ${DRVVER}; Error=$?
-			sudo dkms build -m ${DRVNAME} -v ${DRVVER}; Error=$?
+		if [[ ! -z "$(echo "`dkms status`" | awk '/'${DRVNAME}'/ {print}')" ]];then
+			if [ "$EUID" != "0" ];then
+				echo "You need root permissions:"
+				sudo dkms remove -m ${DRVNAME} -v ${DRVVER} --all; Error=$?
+				sudo dkms add -m ${DRVNAME} -v ${DRVVER}; Error=$?
+				sudo dkms build -m ${DRVNAME} -v ${DRVVER}; Error=$?
+			else
+				dkms remove -m ${DRVNAME} -v ${DRVVER} --all; Error=$?
+				dkms add -m ${DRVNAME} -v ${DRVVER}; Error=$?
+				dkms build -m ${DRVNAME} -v ${DRVVER}; Error=$?
+			fi
 		else
-			dkms add -m ${DRVNAME} -v ${DRVVER}; Error=$?
-			dkms build -m ${DRVNAME} -v ${DRVVER}; Error=$?
+			if [ "$EUID" != "0" ];then
+				echo "You need root permissions:"
+				sudo dkms add -m ${DRVNAME} -v ${DRVVER}; Error=$?
+				sudo dkms build -m ${DRVNAME} -v ${DRVVER}; Error=$?
+			else
+				dkms add -m ${DRVNAME} -v ${DRVVER}; Error=$?
+				dkms build -m ${DRVNAME} -v ${DRVVER}; Error=$?
+			fi
 		fi
 		if [ "$Error" != "0" ];then
 			echo "Install error: $Error"
@@ -105,7 +119,7 @@ if ! command -v dkms >/dev/null 2>&1;then
 		echo "Module ${DRVNAME} already uninstalled"
 	fi
 else
-	if [[ "`dkms status`" =~ "${DRVNAME}" ]];then
+	if [[ "$(echo "`dkms status`" | awk '/'${DRVNAME}'/ {print}')" =~ "${DRVSTATUS}" ]] || [[ ! -z "$(echo "`dkms status`" | awk '/'${DRVNAME}'/ {print}')" ]];then
 		if [ "$EUID" != "0" ];then
 			echo "You need root permissions:"
 			sudo dkms remove -m ${DRVNAME} -v ${DRVVER} --all; Error=$?
