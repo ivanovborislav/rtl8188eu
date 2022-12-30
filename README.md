@@ -245,6 +245,13 @@ make
 sudo make install
 ```
 
+or
+
+```
+chmod +x install.sh
+./install.sh -i
+```
+
 IMPORTANT: Prevent loading old driver r8188eu.
 
 ```
