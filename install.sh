@@ -43,6 +43,7 @@ if ! command -v dkms >/dev/null 2>&1;then
 	fi
 else
 	if [[ ! "$(echo "`dkms status`" | awk '/'${DRVNAME}'/ {print}')" =~ "${DRVSTATUS}" ]];then
+		make clean; Error=$?
 		if [ -e /usr/src/${DRVNAME}-${DRVVER} ];then
 			if [ "$EUID" != "0" ];then
 				echo "You need root permissions:"
@@ -119,7 +120,7 @@ if ! command -v dkms >/dev/null 2>&1;then
 		echo "Module ${DRVNAME} already uninstalled"
 	fi
 else
-	if [[ "$(echo "`dkms status`" | awk '/'${DRVNAME}'/ {print}')" =~ "${DRVSTATUS}" ]] || [[ ! -z "$(echo "`dkms status`" | awk '/'${DRVNAME}'/ {print}')" ]];then
+	if [[ ! -z "$(echo "`dkms status`" | awk '/'${DRVNAME}'/ {print}')" ]];then
 		if [ "$EUID" != "0" ];then
 			echo "You need root permissions:"
 			sudo dkms remove -m ${DRVNAME} -v ${DRVVER} --all; Error=$?
