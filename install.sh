@@ -8,6 +8,8 @@ DRVVER="5.13.3"
 DRVSTATUS="installed"
 KVER="$(uname -r)"
 MODDESTDIR="/lib/modules/${KVER}/kernel/drivers/net/wireless/"
+BLFILE="/etc/modprobe.d/realtek.conf"
+BLDRV="r8188eu"
 
 help () {
 	echo ""
@@ -133,6 +135,37 @@ else
 fi
 }
 
+bl_drv () {
+if [ "$1" = "-i" ]; then
+	if [ ! -z "${BLDRV}" ] && [ "$Error" = "0" ]; then
+		if [ ! -e ${BLFILE} ]; then
+			sudo sh -c "echo 'blacklist ${BLDRV}' > ${BLFILE}"
+		else
+			if [[ ! "$(cat ${BLFILE} | awk '/'${BLDRV}'/ {print}')" =~ "${BLDRV}" ]]; then
+				sudo sh -c "echo 'blacklist ${BLDRV}' >> ${BLFILE}"
+			else
+				echo "Module ${BLDRV} already blacklisted"
+			fi
+		fi
+	fi
+elif [ "$1" = "-u" ]; then
+	if [ ! -z "${BLDRV}" ]  && [ "$Error" = "0" ]; then
+		if [ -e ${BLFILE} ]; then
+			if [[ "$(cat ${BLFILE} | awk '/'${BLDRV}'/ {print}')" =~ "${BLDRV}" ]]; then
+				sudo sed -i '/'${BLDRV}'/d' ${BLFILE}
+				if [ ! -s "${BLFILE}" ];then
+					sudo rm -r ${BLFILE}
+				fi
+			else
+				echo "Module ${BLDRV} already unblacklisted"
+			fi
+		else
+			echo "Module ${BLDRV} already unblacklisted"
+		fi
+	fi
+fi
+}
+
 if [ -z "$1" ];then
 	echo "[options] is not defined"
 	help
@@ -141,9 +174,11 @@ elif [ "$1" = "-h" ] || [ "$1" = "--help" ];then
 elif [ "$1" = "-i" ];then
 	echo "Install Realtek ${DRVNAME} Wireless Lan Driver..."
 	inst_drv
+	bl_drv "$1"
 elif [ "$1" = "-u" ];then
 	echo "Uninstall Realtek ${DRVNAME} Wireless Lan Driver..."
 	uinst_drv
+	bl_drv "$1"
 else
 	echo "Incorrect [options] "$1""
 	help
