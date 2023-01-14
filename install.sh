@@ -1,6 +1,6 @@
 #!/bin/bash
 # Simple install script for 8188eu
-# December, 25 2022 v0.0.3 borislavIvanov
+# December, 25 2022 v0.0.4 borislavIvanov
 
 MODNAME="8188eu"
 DRVNAME="rtl8188eu"
