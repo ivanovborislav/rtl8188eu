@@ -10519,10 +10519,12 @@ static int rtw_priv_get(struct net_device *dev,
 		return -ENETDOWN;
 	}
 
+	/* patch for "rtw_sctx_wait timeout: dump_mgntframe_and_wait" https://lkml.org/lkml/2022/11/6/275
 	if (RTW_CANNOT_RUN(padapter)) {
 		RTW_INFO("%s fail =>(padapter->bSurpriseRemoved == _TRUE) || ( padapter->bDriverStopped == _TRUE)\n", __func__);
 		return -ENETDOWN;
 	}
+	*/
 
 	if (extra == NULL) {
 		wrqu->length = 0;

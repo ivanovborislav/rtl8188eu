@@ -8,6 +8,7 @@
 - Based on EDIMAX EW-7811Un V2 Linux Driver (Version : 1.0.1.3) 2021-10-01
 - Support Kernel: 3.8 - 5.4 (Realtek)
 - Support up to Kernel 6.2
+- Support for RaspiOS added by [@d3vilh](https://github.com/d3vilh)
 
 Kernel v6.3rc2 support
 ```
