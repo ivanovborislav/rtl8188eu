@@ -28,7 +28,7 @@ inst_drv () {
 if ! command -v dkms >/dev/null 2>&1;then
 	if [ ! -f "${MODDESTDIR}${MODNAME}.ko" ];then
 		make clean; Error=$?
-		make; Error=$?
+		make -j$(expr $(nproc) - 1); Error=$?
 		if [ "$Error" != "0" ];then
 			echo "Install error: $Error"
 			exit
